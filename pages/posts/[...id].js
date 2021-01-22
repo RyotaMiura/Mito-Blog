@@ -6,7 +6,7 @@ import utilStyles from '../../styles/utils.module.css'
 
 // ビルド可能なファイルデータを取得
 export async function getStaticProps({ params }) {
-    const postData = await getPostData(params.id)
+    const postData = await getPostData(params.id.join('/'))
     return {
         props: {
             postData,
@@ -15,6 +15,8 @@ export async function getStaticProps({ params }) {
 }
 
 // ビルド可能なファイルデータを参照
+// 開発環境内ではリクエスト毎に処理が行われるので、SSRと同じ挙動になる
+// 本番環境ではビルド時に処理が走り、SSGとなる
 export async function getStaticPaths() {
     const paths = getAllPostIds()
     return {
