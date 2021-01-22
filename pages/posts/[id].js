@@ -4,7 +4,8 @@ import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
 
-// ビルド可能なファイルデータを取得
+// 一意なidと紐付いたファイルデータを取得して返す
+// サーバーサイドで行われる処理
 export async function getStaticProps({ params }) {
     const postData = await getPostData(params.id)
     return {
@@ -14,7 +15,8 @@ export async function getStaticProps({ params }) {
     }
 }
 
-// ビルド可能なファイルデータを参照
+// ビルド可能なファイルデータを取得して返す
+// サーバーサイドで行われる処理
 export async function getStaticPaths() {
     const paths = getAllPostIds()
     return {
