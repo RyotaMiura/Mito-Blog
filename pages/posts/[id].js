@@ -6,6 +6,7 @@ import utilStyles from '../../styles/utils.module.css'
 
 // 一意なidと紐付いたファイルデータを取得して返す
 // サーバーサイドで行われる処理
+// 外部APIからデータを取得するのでawaitしてあげる
 export async function getStaticProps({ params }) {
     const postData = await getPostData(params.id)
     return {
@@ -17,8 +18,9 @@ export async function getStaticProps({ params }) {
 
 // ビルド可能なファイルデータを取得して返す
 // サーバーサイドで行われる処理
+// 外部APIからデータを取得するのでawaitしてあげる
 export async function getStaticPaths() {
-    const paths = getAllPostIds()
+    const paths = await getAllPostIds()
     return {
         // pathsは事前ビルドするパス対象を指定するパラメータ
         // pathsに入っているのは...
